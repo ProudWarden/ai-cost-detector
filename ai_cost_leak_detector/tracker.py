@@ -14,6 +14,7 @@ def track_request(
     input_tokens: int,
     output_tokens: int,
     timestamp: str,
+    db_path: str = "ai_costs.db",
 ) -> float:
     """
     Calculate the cost of an AI request and persist it to the database.
@@ -26,6 +27,7 @@ def track_request(
         input_tokens (int):  Number of prompt tokens consumed. Must be >= 0.
         output_tokens (int): Number of completion tokens generated. Must be >= 0.
         timestamp (str):     ISO-8601 timestamp of the request.
+        db_path (str):       Path to the SQLite database file.
 
     Returns:
         float: The calculated cost in USD.
@@ -56,6 +58,7 @@ def track_request(
         output_tokens=output_tokens,
         cost=cost,
         timestamp=timestamp,
+        db_path=db_path,
     )
 
     return cost
@@ -66,7 +69,7 @@ def track_request(
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
     cost = track_request(
-        request_id="req-003",
+        request_id="req-002",
         feature="summarisation",
         user_id="user-42",
         model="gpt-4.1-mini",
